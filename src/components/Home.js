@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
-import { Link } from 'react-router';
 
 class Home extends Component{
-  handleSubmit(event){
+  handleSubmit = (event) => {
     event.preventDefault();
-    let teacherName = event.target.elements[0].value;
-    let teacherTopic = event.target.elements[1].value;
-    let path = `featured/${teacherTopic}/${teacherName}`;
-    browserHistory.push(path);
+    let teacherName = this.name.value;
+    let teacherTopic = this.topic.value;
+    let path = `teachers/${teacherTopic}/${teacherName}`;
+    this.props.history.push(path);
   }
   render(){
     return(
@@ -19,10 +17,9 @@ class Home extends Component{
         <p>We have thousands of videos created by expert teachers on web design and front end development. Our library is continually refreshed with the latest on web technology so you will never fall behind.</p>
         <hr/>
         <h3>Featured Teachers</h3>
-        {/* <Link to="featured/javascript/Angie McAngular">Angie McAngular</Link> */}
         <form onSubmit={this.handleSubmit}>
-          <input type="text" placeholder="Name"/>
-          <input type="text" placeholder="Topic"/>
+          <input type="text" placeholder="Name" ref={ (input) => this.name = input }/>
+          <input type="text" placeholder="Topic" ref={ (input) => this.topic = input }/>
           <button type="submit">Go!</button>
         </form>
       </div>

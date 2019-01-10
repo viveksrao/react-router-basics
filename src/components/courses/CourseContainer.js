@@ -1,25 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Course from './Course';
 
-
-class CourseContainer extends Component{
-  render(){
-    let courseList = this.props.route.data;
-    let courses = courseList.map((course) =>{
-      return <Course title={course.title}
-                      desc={course.description}
-                      img={course.img_src}
-                      key={course.id}/>
-    });
-    return(
-      <div>
-        <ul>
-          {courses}
-        </ul>
-      </div>
-    );
-  }
-}
+const CourseContainer = (props) => {
+  let courses = props.data.map((course) =>{
+  return <Course title={course.title}
+    desc={course.description}
+    img={course.img_src}
+    key={course.id}
+    alt="Course"/>
+  });
+  return(
+    <div>
+      <ul>
+        {courses}
+      </ul>
+    </div>
+  );
+};
 
 export default CourseContainer;

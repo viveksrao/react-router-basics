@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
-import NavLink from './NavLink';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-class App extends Component{
-  render(){
-    return(
-      <div className="container">
-        <header>
-          <span className="icn-logo">
-            <i className="material-icons">
-              code
-            </i>
-          </span>
-          <ul className="main-nav">
-            <li><NavLink to="/">Home</NavLink></li>
-            <li><NavLink to="/about">About</NavLink></li>
-            <li><NavLink to="/teachers">Teachers</NavLink></li>
-            <li><NavLink to="/courses">Courses</NavLink></li>
-          </ul>
-        </header>
-        {this.props.children}
-      </div>
-    );
-  }
-}
+// App components
+import Header from './Header';
+import Home from './Home';
+import About from './About';
+import Teachers from './Teachers';
+import Featured from './Featured'
+import Courses from './Courses';
+import NotFound from './NotFound';
+
+const App = () => (
+  <BrowserRouter>
+    <div className="container">
+      <Header/>
+      <Switch>
+        <Route exact path="/" component={Home}/>
+        <Route path="/about" render={ () => <About title='About'/>}/>
+        <Route exact path="/teachers" component={Teachers}/>
+        <Route path="/teachers/:topic/:name" component={Featured}/>
+        <Route path="/courses" component={Courses}/>
+        <Route component={NotFound}/>
+      </Switch>
+    </div>
+  </BrowserRouter>
+);
 
 export default App;
